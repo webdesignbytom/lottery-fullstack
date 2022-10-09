@@ -12,7 +12,32 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String @db.VarChar(250)
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String    @db.VarChar(250)
+  tickets   Ticket[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
+
+model Ticket {
+  id         Int      @id @default(autoincrement())
+  balls      Int[]
+  bonusBalls Int[]
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  drawId     Int
+  draw       Draw     @relation(fields: [drawId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Draw {
+  id             Int       @id @default(autoincrement())
+  drawDate       DateTime  @unique
+  winningNumbers Int[]
+  prize Int
+  tickets Ticket[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
+}
+
