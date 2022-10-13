@@ -11,12 +11,19 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+  DEVELOPER
+}
+
 model User {
   id        Int       @id @default(autoincrement())
   email     String    @unique
   password  String    @db.VarChar(250)
   tickets   Ticket[]
   wallet    Wallet?
+  role      Role      @default(USER)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
@@ -44,6 +51,8 @@ model Draw {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime? @updatedAt
 }
+
+// prize
 
 model Wallet {
   id          Int       @id @default(autoincrement())

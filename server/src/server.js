@@ -13,7 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const userRouter = require('./routers/users');
+const drawRouter = require('./routers/draws');
 
+app.use('/draw', drawRouter)
+app.use('/draws', drawRouter)
 app.use('/users', userRouter)
 app.use('/', userRouter)
 
