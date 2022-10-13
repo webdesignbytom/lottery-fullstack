@@ -16,6 +16,7 @@ model User {
   email     String    @unique
   password  String    @db.VarChar(250)
   tickets   Ticket[]
+  wallet    Wallet?
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
@@ -43,3 +44,28 @@ model Draw {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime? @updatedAt
 }
+
+model Wallet {
+  id          Int       @id @default(autoincrement())
+  totalCredit Int       @default(0)
+  deposit     Deposit[]
+  userId      Int       @unique
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  // password
+}
+
+model Deposit {
+  id        Int      @id @default(autoincrement())
+  amount    Int      @default(0)
+  status    String
+  currency  String
+  walletId  Int      @unique
+  wallet    Wallet   @relation(fields: [walletId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+// withdraw
+// transaction log
+// currency supported

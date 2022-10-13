@@ -27,8 +27,11 @@ const getAllUsers = async (req, res) => {
 const createNewUser = async (req, res) => {
     console.log('creating new user')
     const { email, password } = req.body
+    let username = ''
 
     const lowerCaseEmail = email.toLowerCase()
+    console.log('lower', lowerCaseEmail);
+
 
     try {
 
