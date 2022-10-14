@@ -29,7 +29,25 @@ async function seed() {
     },
   });
 
-  console.log('createdUser', createdUser, createdAdmin, createdDev);
+  let date = new Date(Date.now() + 6.048e+8)
+
+  const createdFirstDraw = await prisma.draw.create({
+    data: {
+      drawDate: date,
+      prize: 100000
+    },
+  })
+
+  date = new Date(Date.now() + 6.048e+8 * 2)
+
+  const createdSecondDraw = await prisma.draw.create({
+    data: {
+      drawDate: date,
+      prize: 100000
+    },
+  })
+
+  console.log('createdUser', createdUser, createdAdmin, createdDev, createdFirstDraw, createdSecondDraw);
 }
 
 seed().catch(async (error) => {

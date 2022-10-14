@@ -48,6 +48,8 @@ model Draw {
   winningNumbers Int[]
   prize          Int
   tickets        Ticket[]
+  ticketsSold    Int       @default(0)
+  usersTotal     Int       @default(0)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime? @updatedAt
 }

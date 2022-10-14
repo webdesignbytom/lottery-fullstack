@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Draw" ALTER COLUMN "ticketsSold" SET DEFAULT 0,
+ALTER COLUMN "usersTotal" SET DEFAULT 0;
